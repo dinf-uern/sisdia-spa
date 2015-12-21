@@ -37,20 +37,27 @@
 
 
     /** @ngInject */
-    function formCursoController($log, Tag) {
+    function formCursoController($log, Restangular) {
+      var Tags = Restangular.all('tags');
       var vm = this;
 
       vm.queryTags = function(srch){
-        return Tag.find({
-          filter: {
-            where: { nome: {like: '%' + srch + '%'} },
-            limit: 10
-          }
-        });
+        return Tags.getList({
+          where: { nome: {like: '%' + srch + '%'} },
+          limit: 10
+        }).$object;
       }
 
       vm.transformChip = function(chip){
-        return _.pick(chip, 'nome');
+        var result = {};
+
+        if (chip.constructor === String)
+          result = {nome: chip};
+
+        if (chip.constructor === Object)
+          result = _.pick(chip, 'nome');
+
+        return result;
       }
     }
 
