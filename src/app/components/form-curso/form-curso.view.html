@@ -1,0 +1,47 @@
+<form name="form" novalidate>
+    <md-input-container class="md-block">
+        <label>Nome</label>
+        <input md-maxlength="255" required name="nome" ng-model="formData.nome">
+        <div ng-messages="form.nome.$error">
+            <div ng-message="required">Informe o nome.</div>
+            <div ng-message="md-maxlength">O nome deve ter no máximo 255 caracteres.</div>
+        </div>
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label>Carga Horária (Ch)</label>
+        <input type="number" required name="cargaHoraria" ng-model="formData.cargaHoraria">
+        <div ng-messages="form.cargaHoraria.$error">
+            <div ng-message="required">Informe a carga horária.</div>
+        </div>
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label>Descrição</label>
+        <textarea name="descricao" ng-model="formData.descricao" required></textarea>
+        <div ng-messages="form.cargaHoraria.$error">
+            <div ng-message="required">Informe a descrição.</div>
+            <div ng-message="md-maxlength">O descrição deve ter no máximo 255 caracteres.</div>
+        </div>
+    </md-input-container>
+
+    <md-chips ng-model="formData.tags" md-autocomplete-snap md-require-match="true"  md-transform-chip="ctrl.transformChip($chip)">
+      <md-autocomplete
+              md-selected-item="ctrl.tagSelecionada"
+              md-search-text="ctrl.tagSrchTerm"
+              md-items="item in ctrl.queryTags(ctrl.tagSrchTerm)"
+              md-item-text="item.nome"
+              placeholder="+Tag">
+          <span md-highlight-text="tagSrchTerm">{{item.nome}}</span>
+      </md-autocomplete>
+      <md-chip-template>
+          <img ng-if="$chip.imgUrl" class="tag-icon" ng-src="{{$chip.imgUrl}}"><span>{{$chip.nome}}</span>
+      </md-chip-template>
+    </md-chips>
+
+    <md-input-container class="md-block">
+        <label>Url da Imagem</label>
+        <input md-maxlength="255" name="imgUrl" ng-model="formData.imgUrl">
+        <div ng-messages="form.imgUrl.$error">
+            <div ng-message="md-maxlength">A url da imagem deve ter no máximo 255 caracteres.</div>
+        </div>
+    </md-input-container>
+</form>

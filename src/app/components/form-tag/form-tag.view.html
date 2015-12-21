@@ -1,0 +1,17 @@
+<form name="form" novalidate>
+    <md-input-container class="md-block">
+        <label>Nome</label>
+        <input md-maxlength="255" required name="nome" ng-model="formData.nome">
+        <div ng-messages="form.nome.$error">
+            <div ng-message="required">Informe o nome.</div>
+            <div ng-message="md-maxlength">O nome deve ter no máximo 255 caracteres.</div>
+        </div>
+    </md-input-container>
+    <md-input-container class="md-block">
+        <label>Url da Imagem</label>
+        <input md-maxlength="255" name="imgUrl" ng-model="formData.imgUrl">
+        <div ng-messages="form.imgUrl.$error">
+            <div ng-message="md-maxlength">A url da imagem deve ter no máximo 255 caracteres.</div>
+        </div>
+    </md-input-container>
+</form>

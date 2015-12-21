@@ -1,0 +1,11 @@
+<form ng-controller="SalasFiltersController as ctrl" layout-padding>
+
+    <!-- pesquisar -->
+    <md-input-container md-no-float class="md-block">
+        <md-icon md-svg-src="bower_components/material-design-icons/action/svg/production/ic_search_24px.svg"></md-icon>
+        <input ng-model="ctrl.filters.q" type="text" placeholder="Pesquisar" ng-change="ctrl.aplicar()" ng-model-options="{ debounce: 600 }">
+
+    </md-input-container>
+    <!-- fim pesquisar -->
+
+</form>

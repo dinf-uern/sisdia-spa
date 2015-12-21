@@ -1,0 +1,12 @@
+<md-card
+        flex-offset="5"
+        flex-offset-gt-md="10"
+        flex="90"
+        flex-gt-md="80">
+<md-card-content>
+      <form-tag form-data="ctrl.data" on-submit="ctrl.onFormSubmit" ng-if="!ctrl.loading"></form-tag>
+    </md-card-content>
+    <div layout="row" layout-align="center center" ng-if="ctrl.loading" style="padding-bottom: 20px;">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+</md-card>
