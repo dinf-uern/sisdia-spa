@@ -30,11 +30,6 @@
             },
           ]
         },
-        resolve: {
-          tags: function (Restangular) {
-            return Restangular.all('tags').getList();
-          }
-        },
         templateUrl: 'app/tags/listar-tags.view.html',
         controller: 'ListarTagsController',
         controllerAs: 'ctrl'

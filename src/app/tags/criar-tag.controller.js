@@ -6,11 +6,12 @@
     .controller('CriarTagController', CriarTagController);
 
   /** @ngInject */
-  function CriarTagController($log, Restangular, $state, dfNotify, Tag) {
+  function CriarTagController($log, $state, Restangular, dfNotify) {
+    var Tags = Restangular.all('tags');
     var vm = this;
 
     vm.onFormSubmit = function(data){
-      Tag.create(data, function(){
+      Tags.post(data).then(function(){
         $state.go('main.tags.listar');
       });
     }

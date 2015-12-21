@@ -6,11 +6,13 @@
     .controller('ListarTagsController', ListarTagsController);
 
   /** @ngInject */
-  function ListarTagsController($scope, $log, $state, $stateParams, dfNotify, Tag) {
+  function ListarTagsController($scope, $log, $state, $stateParams, Restangular, dfNotify) {
+    var Tags = Restangular.all('tags');
+
     var vm = this;
 
-    vm.tags = [];
-    vm.count = 1;
+    vm.items = [];
+    vm.count = 0;
 
     vm.filters = angular.copy($stateParams);
 
@@ -30,24 +32,25 @@
       return filtersData;
     }
 
-    vm.verTag = function(tag){
+    vm.verItem = function(tag){
       $state.go('main.tags.ver', {id: tag.id})
     }
 
     vm.loadData = function(filters){
       vm.loading = true;
 
-      Tag.find({ filter: filters }, function(response){
-        vm.loading = false;
+      Tags
+        .getList(filters)
+        .then(function(response){
+          vm.loading = false;
 
-        _.forEach(response, function(post){
-          vm.tags.push(post);
+          _.forEach(response.data, function(tag){
+            vm.items.push(tag);
+          });
+
+          if (vm.items.length > 0)
+            dfNotify.show('Exibindo ' + vm.items.length + ' de ' + vm.count + ' itens');
         });
-
-        if (vm.tags.length > 0)
-          dfNotify.show('Exibindo ' + vm.tags.length + ' de ' + vm.count + ' itens');
-
-      });
     }
 
     vm.loadMore = function(){
@@ -62,8 +65,9 @@
 
     var filters = getFilters(page, limit, $stateParams.q);
 
-    Tag.count({where: filters.where}, function(result){
-      vm.count = result.count;
+
+    Tags.get('count', {where: filters.where}).then(function(result){
+      vm.count = result.data.count;
     });
 
     vm.loadData(filters);
