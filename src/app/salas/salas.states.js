@@ -30,11 +30,6 @@
             },
           ]
         },
-        resolve: {
-          salas: function (Restangular) {
-            return Restangular.all('salas').getList();
-          }
-        },
         templateUrl: 'app/salas/listar-salas.view.html',
         controller: 'ListarSalasController',
         controllerAs: 'ctrl'
@@ -55,6 +50,48 @@
         },
         templateUrl: 'app/salas/criar-sala.view.html',
         controller: 'CriarSalaController',
+        controllerAs: 'ctrl'
+      })
+
+      .state('main.salas.editar', {
+        url: '/editar/:id',
+        data: {
+          title: 'Editar Sala',
+          leftSidenavFixedOnLarge: false,
+          floatingButtons: [
+            {
+              caption: 'Salvar',
+              icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/navigation/svg/production/ic_check_24px.svg',
+              action: { event: 'ui.request-submit' }
+            },
+          ]
+        },
+        templateUrl: 'app/salas/editar-sala.view.html',
+        controller: 'EditarSalaController',
+        controllerAs: 'ctrl'
+      })
+
+      .state('main.salas.ver', {
+        url: '/ver/:id',
+        data: {
+          title: 'Ver Sala',
+          leftSidenavFixedOnLarge: false,
+          floatingButtons: [
+            {
+              caption: 'Remover',
+              icon: 'bower_components/material-design-icons/content/svg/production/ic_clear_24px.svg',
+              action: { event: 'ui.request-remove' },
+              class: 'md-fab md-warn md-hue-2'
+            },
+            {
+              caption: 'Editar',
+              icon: 'bower_components/material-design-icons/image/svg/production/ic_edit_24px.svg',
+              action: { event: 'ui.request-edit' }
+            },
+          ]
+        },
+        templateUrl: 'app/salas/ver-sala.view.html',
+        controller: 'VerSalaController',
         controllerAs: 'ctrl'
       });
   }

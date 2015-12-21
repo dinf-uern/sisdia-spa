@@ -6,12 +6,12 @@
     .controller('CriarSalaController', CriarSalaController);
 
   /** @ngInject */
-  function CriarSalaController($log, Restangular, $state, dfNotify, Sala) {
+  function CriarSalaController($log, $state, Restangular, dfNotify) {
+    var Salas = Restangular.all('salas');
     var vm = this;
 
     vm.onFormSubmit = function(data){
-      Sala.create(data, function(){
-        dfNotify.show('Sala criada com sucesso!');
+      Salas.post(data).then(function(){
         $state.go('main.salas.listar');
       });
     }

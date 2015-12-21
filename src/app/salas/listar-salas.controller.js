@@ -6,62 +6,74 @@
     .controller('ListarSalasController', ListarSalasController);
 
   /** @ngInject */
-  function ListarSalasController($scope, $log, $state, $stateParams, dfNotify, Sala) {
+  function ListarSalasController($scope, $log, $state, $stateParams, Restangular, dfNotify) {
+    var Salas = Restangular.all('salas');
+
     var vm = this;
 
-    vm.salas = [];
-    vm.count = 1;
+    vm.items = [];
+    vm.count = 0;
 
     vm.filters = angular.copy($stateParams);
 
     var page = 0;
     var limit = 5;
 
-    function getFilters(){
+    function getFilters(page, limit, q){
       var filtersData = {
         limit: limit,
         skip: page * limit,
         where: {}
       };
 
-      if ($stateParams.q)
-        filtersData.where.nome = { like: '%' + $stateParams.q + '%' };
+      if (q)
+        filtersData.where.nome = { like: '%' + q + '%' };
 
       return filtersData;
     }
 
-    vm.loadData = function(filters, page){
-      vm.loading = true;
-
-      Sala.find({ filter: filters }, function(response){
-        vm.loading = false;
-
-        _.forEach(response, function(post){
-          vm.salas.push(post);
-        });
-
-        if (vm.salas.length > 0)
-          dfNotify.show('Exibindo ' + vm.salas.length + ' de ' + vm.count + ' itens');
-      });
+    vm.verItem = function(sala){
+      $state.go('main.salas.ver', {id: sala.id})
     }
 
-    vm.loadMore = function(filters){
+    vm.loadData = function(filters){
+      vm.loading = true;
+
+      Salas
+        .getList(filters)
+        .then(function(response){
+          vm.loading = false;
+
+          _.forEach(response.data, function(sala){
+            vm.items.push(sala);
+          });
+
+          if (vm.items.length > 0)
+            dfNotify.show('Exibindo ' + vm.items.length + ' de ' + vm.count + ' itens');
+        });
+    }
+
+    vm.loadMore = function(){
       if ((page + 1) * limit < vm.count) {
         page += 1;
-        vm.loadData(filters, page);
+
+        var filters = getFilters(page, limit, $stateParams.q);
+
+        vm.loadData(filters);
       }
     }
 
-    var filters = getFilters($stateParams.q);
+    var filters = getFilters(page, limit, $stateParams.q);
 
-    Sala.count({where: filters.where}, function(result){
-      vm.count = result.count;
+
+    Salas.get('count', {where: filters.where}).then(function(result){
+      vm.count = result.data.count;
     });
 
-    vm.loadData(filters, page);
+    vm.loadData(filters);
 
     $scope.$on('scroll.reached-end', function(){
-      vm.loadMore(filters);
+      vm.loadMore();
     });
 
   }

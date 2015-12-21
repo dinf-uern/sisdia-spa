@@ -8,6 +8,5 @@
   /** @ngInject */
   function SalasController() {
     var vm = this;
-    vm.salas = ['some', 'other'];
   }
 })();
