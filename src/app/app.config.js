@@ -6,11 +6,9 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, $urlRouterProvider, $mdThemingProvider, RestangularProvider, LoopBackResourceProvider, dfMainMenuProvider) {
+  function config($logProvider, $urlRouterProvider, $mdThemingProvider, RestangularProvider, dfMainMenuProvider) {
 
     $logProvider.debugEnabled(true);
-
-    LoopBackResourceProvider.setUrlBase('http://localhost:3500/api');
 
     $mdThemingProvider
       .theme('default')
@@ -28,7 +26,8 @@
 
     menuItems.forEach(dfMainMenuProvider.addItem);
 
-    RestangularProvider.setBaseUrl('http://localhost:3500/api');
+    RestangularProvider.setBaseUrl('http://localhost:3500/v1');
+    RestangularProvider.setDefaultHeaders({'Access-Control-Allow-Origin':'*'});
     RestangularProvider.setFullResponse(true);
 
     $urlRouterProvider.otherwise('/');
