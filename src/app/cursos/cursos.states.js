@@ -30,11 +30,6 @@
             },
           ]
         },
-        resolve: {
-          cursos: function (Restangular) {
-            return Restangular.all('cursos').getList();
-          }
-        },
         templateUrl: 'app/cursos/listar-cursos.view.html',
         controller: 'ListarCursosController',
         controllerAs: 'ctrl'
@@ -60,7 +55,6 @@
 
       .state('main.cursos.editar', {
         url: '/editar/:id',
-        abstract: true,
         data: {
           title: 'Editar Curso',
           leftSidenavFixedOnLarge: false,
@@ -74,20 +68,6 @@
         },
         templateUrl: 'app/cursos/editar-curso.view.html',
         controller: 'EditarCursoController',
-        controllerAs: 'ctrl'
-      })
-
-      .state('main.cursos.editar.info', {
-        url: '',
-        templateUrl: 'app/cursos/editar-curso-info.view.html',
-        controller: 'EditarCursoInfoController',
-        controllerAs: 'ctrl'
-      })
-
-      .state('main.cursos.editar.tags', {
-        url: '/tags',
-        templateUrl: 'app/cursos/editar-curso-tags.view.html',
-        controller: 'EditarCursoTagsController',
         controllerAs: 'ctrl'
       })
 

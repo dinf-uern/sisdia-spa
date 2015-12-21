@@ -6,11 +6,13 @@
     .controller('ListarCursosController', ListarCursosController);
 
   /** @ngInject */
-  function ListarCursosController($scope, $log, $state, $stateParams, dfNotify, Curso) {
+  function ListarCursosController($scope, $log, $state, $stateParams, Restangular, dfNotify) {
+    var Cursos = Restangular.all('cursos');
+
     var vm = this;
 
-    vm.cursos = [];
-    vm.count = 1;
+    vm.items = [];
+    vm.count = 0;
 
     vm.filters = angular.copy($stateParams);
 
@@ -30,24 +32,25 @@
       return filtersData;
     }
 
-    vm.verCurso = function(curso){
+    vm.verItem = function(curso){
       $state.go('main.cursos.ver', {id: curso.id})
     }
 
     vm.loadData = function(filters){
       vm.loading = true;
 
-      Curso.find({ filter: filters }, function(response){
-        vm.loading = false;
+      Cursos
+        .getList(filters)
+        .then(function(response){
+          vm.loading = false;
 
-        _.forEach(response, function(post){
-          vm.cursos.push(post);
+          _.forEach(response.data, function(curso){
+            vm.items.push(curso);
+          });
+
+          if (vm.items.length > 0)
+            dfNotify.show('Exibindo ' + vm.items.length + ' de ' + vm.count + ' itens');
         });
-
-        if (vm.cursos.length > 0)
-          dfNotify.show('Exibindo ' + vm.cursos.length + ' de ' + vm.count + ' itens');
-
-      });
     }
 
     vm.loadMore = function(){
@@ -62,8 +65,9 @@
 
     var filters = getFilters(page, limit, $stateParams.q);
 
-    Curso.count({where: filters.where}, function(result){
-      vm.count = result.count;
+
+    Cursos.get('count', {where: filters.where}).then(function(result){
+      vm.count = result.data.count;
     });
 
     vm.loadData(filters);

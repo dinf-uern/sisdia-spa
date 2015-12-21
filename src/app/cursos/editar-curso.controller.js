@@ -6,29 +6,24 @@
     .controller('EditarCursoController', EditarCursoController);
 
   /** @ngInject */
-  function EditarCursoController($log, $state, $stateParams, dfNotify, Curso) {
+  function EditarCursoController($log, $state, $stateParams, Restangular, dfNotify) {
+    var Cursos = Restangular.all('cursos');
     var vm = this;
-
-
-    vm.tabs = [
-      { label: 'Info', templateUrl: 'app/cursos/editar-curso-info.view.html', state: 'main.cursos.editar.info' },
-      { label: 'Tags', templateUrl: 'client/turmas/turmas.listar.anteriores.html', state: 'main.cursos.editar.tags' }
-    ];
-
     vm.loading = true;
 
-    Curso.findById({
-      id: $stateParams.id,
-      filter: {
-        include:'tags'
+    Cursos.get($stateParams.id,
+      {
+        include: angular.toJson([
+          { model : "tags" }
+        ])
       }
-    }, function(data){
-      vm.data = data;
+    ).then(function(result){
+      vm.data = result.data;
       vm.loading = false;
     });
 
     vm.onFormSubmit = function(){
-      vm.data.$save(function(){
+      vm.data.save().then(function(){
         $state.go('main.cursos.listar');
       });
     }

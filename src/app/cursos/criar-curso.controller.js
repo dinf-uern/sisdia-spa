@@ -6,16 +6,16 @@
     .controller('CriarCursoController', CriarCursoController);
 
   /** @ngInject */
-  function CriarCursoController($log, $state, dfNotify, Curso) {
+  function CriarCursoController($log, $state, Restangular, dfNotify) {
+    var Cursos = Restangular.all('cursos');
     var vm = this;
-
     vm.data = {
       tags: []
     };
 
     vm.onFormSubmit = function(data){
-      Curso.create(vm.data, function(){
-        //$state.go('main.cursos.listar');
+      Cursos.post(data).then(function(){
+        $state.go('main.cursos.listar');
       });
     }
 
