@@ -1,0 +1,25 @@
+<md-card
+        flex-offset="5"
+        flex-offset-gt-md="10"
+        flex="90"
+        flex-gt-md="80">
+    <md-card-content>
+        <md-list>
+            <md-subheader class="md-no-sticky" ng-if="!ctrl.loading">
+                <span ng-if="ctrl.filters.q">Pesquisa por <strong>"{{ctrl.filters.q}}"</strong>. </span>
+                <span ng-if="ctrl.count <= 0">Nehum item encontrado.</span>
+                <span ng-if="ctrl.count == 1">Foi encontrado <strong>{{ctrl.count}}</strong> item.</span>
+                <span ng-if="ctrl.count > 1">Foram encontrados <strong>{{ctrl.count}}</strong> itens.</span>
+            </md-subheader>
+            <md-list-item class="md-2-line" ng-repeat="item in ctrl.items" ng-click="ctrl.verItem(item)">
+                <img ng-src="{{item.imgUrl || 'https://secure.kreationnext.com/blog/wp-content/plugins/special-recent-posts/images/no-thumb.png'}}" class="md-avatar" alt="{{item.nome}}" />
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{ item.nome }}</h3>
+                </div>
+            </md-list-item>
+    </md-card-content>
+    <div layout="row" layout-align="center center" ng-if="ctrl.loading" style="padding-bottom: 20px;">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <!--<df-button caption="'carregar +'" action="{ exec: loadMore }"></df-button>-->
+</md-card>

@@ -1,0 +1,142 @@
+<form name="form" novalidate>
+
+    <md-card>
+        <md-card-content>
+            <md-input-container class="md-block">
+                <md-select name="curso" placeholder="Escolha o curso" ng-model="formData.cursoId" md-on-open="ctrl.loadCursos()">
+                    <md-option ng-value="item.id" ng-repeat="item in ctrl.cursos">{{item.nome}}</md-option>
+                </md-select>
+                <div class="errors" ng-messages="form.curso.$error" ng-if="form.$dirty">
+                    <div ng-message="required">Informe o curso!</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <md-select name="sala" placeholder="Escolha a sala" ng-model="formData.salaId" md-on-open="ctrl.loadSalas()">
+                    <md-option ng-value="item.id" ng-repeat="item in ctrl.salas">{{item.nome}}</md-option>
+                </md-select>
+                <div class="errors" ng-messages="form.sala.$error" ng-if="form.$dirty">
+                    <div ng-message="required">Informe a sala!</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Total de Vagas</label>
+                <input name="totalVagas" type="number" ng-model="formData.totalVagas" required>
+                <div ng-messages="form.totalVagas.$error" ng-if="form.$dirty">
+                    <div ng-message="required">Informe o total de vagas!</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Cor da turma</label>
+                <input type="color" required name="cor" ng-model="formData.cor">
+                <div ng-messages="form.cor.$error" ng-if="form.$dirty">
+                    <div ng-message="required">Escolha uma cor!</div>
+                </div>
+            </md-input-container>
+        </md-card-content>
+    </md-card>
+
+    <!-- card nome da turma -->
+    <md-card>
+        <md-card-content>
+            <h4>Nome da Turma</h4>
+            <div layout="column" ng-if="ctrl.nomeTurmaMode=='templateBased'">
+                <md-input-container>
+                    <label>Baseado em template</label>
+                    <md-select ng-model="formData.nome">
+                        <md-option ng-value="template" ng-repeat="template in ctrl.nomeTurmaTemplates">{{ template }}</md-option>
+                    </md-select>
+                </md-input-container>
+                <a href="#" ng-click="ctrl.enterNomeTurmaMode($event, 'costumized')">personalizar</a>
+            </div>
+
+            <div layout="column" ng-if="ctrl.nomeTurmaMode=='costumized'">
+                <md-input-container>
+                    <label>Personalizado</label>
+                    <input name="nome" ng-model="formData.nome" required>
+                    <div ng-messages="form.nome.$error" ng-if="form.nome.$touched">
+                        <div ng-message="required">Informe o nome!</div>
+                    </div>
+                </md-input-container>
+                <a href="#" ng-click="ctrl.enterNomeTurmaMode($event, 'templateBased')">cancelar</a>
+            </div>
+
+        </md-card-content>
+    </md-card>
+
+    <!--card inscrições -->
+    <md-card>
+        <md-card-content>
+            <h4>Período de Inscrições</h4>
+            <div layout="row" layout-wrap flex>
+                <md-input-container flex>
+                    <label>Data de Início</label>
+                    <input name="dataInicioInscricoes" type="date" ng-model="formData.periodoInscricoes.inicio" required>
+                    <div ng-messages="form.dataInicioInscricoes.$error" ng-if="form.dataInicioInscricoes.$touched">
+                        <div ng-message="required">Informe a data de início para inscrições!</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Data de Término</label>
+                    <input name="dataTerminoInscricoes" type="date" ng-model="formData.periodoInscricoes.termino" required>
+                    <div ng-messages="form.dataTerminoInscricoes.$error" ng-if="form.dataTerminoInscricoes.$touched">
+                        <div ng-message="required">Informe a data de término para inscrições!</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </md-card-content>
+    </md-card>
+
+    <!-- card aulas -->
+    <md-card>
+        <md-card-content>
+            <h4>Período de Aulas</h4>
+            <div layout="row" layout-wrap flex>
+                <md-input-container flex>
+                    <label>Data de Início</label>
+                    <input name="dataInicioAulas" type="date" ng-model="formData.periodoAulas.inicio" required>
+                    <div ng-messages="form.dataInicioAulas.$error" ng-if="form.dataInicioAulas.$touched">
+                        <div ng-message="required">Informe a data de início para as aulas!</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Data de Término</label>
+                    <input name="dataTerminoAulas" type="date" ng-model="formData.periodoAulas.termino" required>
+                    <div ng-messages="form.dataTerminoAulas.$error" ng-if="form.dataTerminoAulas.$touched">
+                        <div ng-message="required">Informe a data de término para as aulas!</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </md-card-content>
+    </md-card>
+
+    <!-- card diasAula -->
+    <md-card>
+        <md-card-content>
+            <h4>Horário das Aulas</h4>
+            <div layout="row" layout-wrap flex>
+                <md-input-container flex>
+                    <label>Hora de Início</label>
+                    <input name="horaInicio" type="time" ng-model="formData.horarioAulas.horaInicio" required>
+                    <div ng-messages="form.horaInicio.$error" ng-if="form.horaInicio.$touched">
+                        <div ng-message="required">Informe o a hora de início!</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Hora de Termino</label>
+                    <input name="horaTermino" type="time" ng-model="formData.horarioAulas.horaTermino" required>
+                    <div ng-messages="form.horaTermino.$error" ng-if="form.horaTermino.$touched">
+                        <div ng-message="required">Informe o a hora de termino!</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div layout="row" layout-wrap flex>
+                <div flex="50" ng-repeat="dia in ctrl.diasLetivos">
+                    <md-checkbox ng-checked="ctrl.diaExists(dia, formData.horarioAulas.dias)" ng-click="ctrl.diaToggle(dia, formData.horarioAulas.dias)">
+                      {{ dia.nome }}
+                    </md-checkbox>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
+
+</form>

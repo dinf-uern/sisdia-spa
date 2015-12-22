@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope, $state, $log, dfSidenav) {
+  function MainController($scope, $state, $log, dfSidenav, dfNotify) {
     var vm = this;
 
     vm.getTitle = function(){
@@ -75,6 +75,10 @@
         dfNotify.show('Acesso negado!');
         event.preventDefault();
       }
+    });
+
+    $scope.$on('ui.show-notify', function(msg){
+      dfNotify.show(msg);
     });
 
   }

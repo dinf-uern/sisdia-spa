@@ -13,6 +13,7 @@
       'ui.router',
       'ngMaterial',
       'df.shell',
+      'df.utils',
       'lrInfiniteScroll'
     ]);
 

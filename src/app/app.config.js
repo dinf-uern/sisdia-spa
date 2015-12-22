@@ -21,7 +21,7 @@
       { caption: 'Tags', action: {state: 'main.tags.listar'} },
       { caption: 'Cursos', action: {state: 'main.cursos.listar'} },
       { caption: 'Salas', action: {state: 'main.salas.listar'} },
-      { caption: 'Turmas', action: {state: 'main.turmas'} }
+      { caption: 'Turmas', action: {state: 'main.turmas.listar'} }
     ];
 
     menuItems.forEach(dfMainMenuProvider.addItem);
