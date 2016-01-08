@@ -77,7 +77,7 @@
       }
     });
 
-    $scope.$on('ui.show-notify', function(msg){
+    $scope.$on('ui.show-notify', function(event, msg){
       dfNotify.show(msg);
     });
 

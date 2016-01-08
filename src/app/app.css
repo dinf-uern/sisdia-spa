@@ -74,3 +74,9 @@ strong {
   margin-bottom: -2px;
   margin-right: 2px;
 }
+
+.event-icon {
+  height: 16px;
+  display: block;
+  float: right;
+}

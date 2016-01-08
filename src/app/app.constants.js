@@ -6,5 +6,4 @@
     .module('sisdia')
     .constant('malarkey', malarkey)
     .constant('moment', moment);
-
 })();

@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, $urlRouterProvider, $mdThemingProvider, RestangularProvider, dfMainMenuProvider) {
+  function config($logProvider, $httpProvider, $urlRouterProvider, $mdThemingProvider, RestangularProvider, dfMainMenuProvider) {
 
     $logProvider.debugEnabled(true);
 
@@ -29,6 +29,8 @@
     RestangularProvider.setBaseUrl('http://localhost:3500/v1');
     RestangularProvider.setDefaultHeaders({'Access-Control-Allow-Origin':'*'});
     RestangularProvider.setFullResponse(true);
+
+    $httpProvider.interceptors.push('errorInterceptor');
 
     $urlRouterProvider.otherwise('/');
 

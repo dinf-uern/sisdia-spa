@@ -14,7 +14,8 @@
       'ngMaterial',
       'df.shell',
       'df.utils',
-      'lrInfiniteScroll'
+      'lrInfiniteScroll',
+      'ui.calendar'
     ]);
 
 })();
