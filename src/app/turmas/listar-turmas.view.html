@@ -1,25 +1,34 @@
-<md-card
-        flex-offset="5"
-        flex-offset-gt-md="10"
-        flex="90"
-        flex-gt-md="80">
+<md-card>
+    <md-toolbar class="md-primary md-hue-1">
+        <div class="md-toolbar-tools">
+            <span flex="100">{{ctrl.calendarTitle()}}</span>
+
+            <md-button ng-click="ctrl.voltar()" class="md-icon-button" aria-label="Voltar">
+                <md-icon md-svg-icon="bower_components/material-design-icons/hardware/svg/production/ic_keyboard_arrow_left_24px.svg"></md-icon>
+            </md-button>
+            <md-button ng-click="ctrl.hoje()" class="md-icon-button" aria-label="Ir para hoje">
+                <md-icon md-svg-icon="bower_components/material-design-icons/toggle/svg/production/ic_radio_button_checked_24px.svg"></md-icon>
+            </md-button>
+            <md-button ng-click="ctrl.avancar()" class="md-icon-button" aria-label="Avancar">
+                <md-icon md-svg-icon="bower_components/material-design-icons/hardware/svg/production/ic_keyboard_arrow_right_24px.svg"></md-icon>
+            </md-button>
+
+            <md-menu>
+                <md-button class="md-icon-button" aria-label="Modo do calendário" ng-click="ctrl.openMenuCalendarMode($mdOpenMenu, $event)">
+                    <md-icon md-svg-icon="bower_components/material-design-icons/action/svg/production/ic_today_24px.svg"></md-icon>
+                </md-button>
+                <md-menu-content>
+                    <md-menu-item ng-repeat="mode in ctrl.calendarModes">
+                        <md-button ng-click="ctrl.setCalendarMode(mode.name)">
+                          {{mode.title}}
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+
+        </div>
+    </md-toolbar>
     <md-card-content>
-        <md-list>
-            <md-subheader class="md-no-sticky" ng-if="!ctrl.loading">
-                <span ng-if="ctrl.filters.q">Pesquisa por <strong>"{{ctrl.filters.q}}"</strong>. </span>
-                <span ng-if="ctrl.count <= 0">Nehum item encontrado.</span>
-                <span ng-if="ctrl.count == 1">Foi encontrado <strong>{{ctrl.count}}</strong> item.</span>
-                <span ng-if="ctrl.count > 1">Foram encontrados <strong>{{ctrl.count}}</strong> itens.</span>
-            </md-subheader>
-            <md-list-item class="md-2-line" ng-repeat="item in ctrl.items" ng-click="ctrl.verItem(item)">
-                <img ng-src="{{item.imgUrl || 'https://secure.kreationnext.com/blog/wp-content/plugins/special-recent-posts/images/no-thumb.png'}}" class="md-avatar" alt="{{item.nome}}" />
-                <div class="md-list-item-text" layout="column">
-                    <h3>{{ item.nome }}</h3>
-                </div>
-            </md-list-item>
+        <div ui-calendar="ctrl.calendarConfig" calendar="calendarioTurmas" class="span8 calendar" ng-model="ctrl.eventSources"></div>
     </md-card-content>
-    <div layout="row" layout-align="center center" ng-if="ctrl.loading" style="padding-bottom: 20px;">
-        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-    </div>
-    <!--<df-button caption="'carregar +'" action="{ exec: loadMore }"></df-button>-->
 </md-card>

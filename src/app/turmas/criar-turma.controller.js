@@ -29,7 +29,7 @@
 
     vm.onFormSubmit = function(data){
       Turmas.post(data).then(function(){
-        //$state.go('main.turmas.listar');
+        $state.go('main.turmas.listar');
       });
     }
 

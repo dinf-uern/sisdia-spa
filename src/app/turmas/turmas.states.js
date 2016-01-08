@@ -17,7 +17,10 @@
       })
 
       .state('main.turmas.listar', {
-        url: '?:q',
+        url: '?:calendarMode&:day',
+        params: {
+          calendarMode: 'agendaWeek'
+        },
         data: {
           title: 'Turmas',
           leftSidenavPartialOnLarge: 'app/turmas/turmas.filters.view.html',
@@ -29,6 +32,15 @@
               action: { state: 'main.turmas.criar' }
             },
           ]
+        },
+        resolve: {
+          turmas: function(Restangular){
+            return Restangular.all('turmas').getList({
+              include: angular.toJson([
+                {model: 'curso'}
+              ])
+            });
+          }
         },
         templateUrl: 'app/turmas/listar-turmas.view.html',
         controller: 'ListarTurmasController',
