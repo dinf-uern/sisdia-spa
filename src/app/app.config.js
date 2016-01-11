@@ -35,7 +35,7 @@
 
     menuItems.forEach(dfMainMenuProvider.addItem);
 
-    RestangularProvider.setBaseUrl('http://localhost:3500/v1');
+    RestangularProvider.setBaseUrl(baseUrl);
     RestangularProvider.setDefaultHeaders({'Access-Control-Allow-Origin':'*'});
     RestangularProvider.setFullResponse(true);
 
