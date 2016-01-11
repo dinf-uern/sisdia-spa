@@ -6,9 +6,18 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, $httpProvider, $urlRouterProvider, $mdThemingProvider, RestangularProvider, dfMainMenuProvider) {
+  function config($windowProvider, $logProvider, $httpProvider, $urlRouterProvider, $mdThemingProvider, RestangularProvider, dfMainMenuProvider) {
+    var $window = $windowProvider.$get();
+    var baseUrl = 'http://localhost:3500/v1';
 
-    $logProvider.debugEnabled(true);
+    var env = $window.location.hostname === 'herokuapp.com' ? 'stage' : 'development';
+
+    var debugEnabled = env === 'development';
+
+    if (env === 'stage')
+      baseUrl = 'http://sisdia-api.herokuapp.com/v1';
+
+    $logProvider.debugEnabled(debugEnabled);
 
     $mdThemingProvider
       .theme('default')
