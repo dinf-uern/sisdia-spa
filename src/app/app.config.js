@@ -15,7 +15,7 @@
     var debugEnabled = env === 'development';
 
     if (env === 'stage')
-      baseUrl = 'http://sisdia-api.herokuapp.com/v1';
+      baseUrl = 'http://sisdia-api.dev.apps.uern.br/v1';
 
     $logProvider.debugEnabled(debugEnabled);
 
