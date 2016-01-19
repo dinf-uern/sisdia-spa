@@ -10,7 +10,7 @@
     var $window = $windowProvider.$get();
     var baseUrl = 'http://localhost:3500/v1';
 
-    var env = $window.location.hostname === 'sisdia.herokuapp.com' ? 'stage' : 'development';
+    var env = $window.location.hostname === 'sisdia.dev.apps.uern.br' ? 'stage' : 'development';
 
     var debugEnabled = env === 'development';
 
