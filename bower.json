@@ -18,7 +18,7 @@
     "moment": "~2.10.6",
     "animate.css": "~3.4.0",
     "angular": "~1.4.2",
-    "df-shell": "~1.1.5",
+    "df-shell": "~1.2.1",
     "angular-resource": "~1.4.8",
     "material-design-icons": "~2.1.1",
     "lrInfiniteScroll": "~1.0.0",
@@ -38,7 +38,7 @@
     }
   },
   "resolutions": {
-    "angular": "1.4.8",
+    "angular": "1.4.9",
     "angular-animate": "1.4.8",
     "material-design-icons": "2.1.1",
     "fullcalendar": "2.6.0"
