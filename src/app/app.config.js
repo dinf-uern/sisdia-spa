@@ -26,7 +26,7 @@
       .warnPalette('red');
 
     var menuItems = [
-      { caption: 'Home', action: {state: 'main.home'} },
+      { caption: 'Início', action: {state: 'main.home'} },
       { caption: 'Etiquetas', action: {state: 'main.tags.listar'} },
       { caption: 'Cursos', action: {state: 'main.cursos.listar'} },
       { caption: 'Salas', action: {state: 'main.salas.listar'} },
