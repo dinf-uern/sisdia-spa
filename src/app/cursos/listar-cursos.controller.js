@@ -27,7 +27,7 @@
       };
 
       if (q)
-        filtersData.where.nome = { like: '%' + q + '%' };
+        filtersData.where.nome = { $iLike: '%' + q + '%' };
 
       return filtersData;
     }
