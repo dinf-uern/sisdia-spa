@@ -22,7 +22,7 @@
     function getFilters(page, limit, q){
       var filtersData = {
         limit: limit,
-        skip: page * limit,
+        offset: page * limit,
         where: {}
       };
 
