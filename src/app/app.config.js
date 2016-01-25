@@ -27,7 +27,7 @@
 
     var menuItems = [
       { caption: 'Home', action: {state: 'main.home'} },
-      { caption: 'Tags', action: {state: 'main.tags.listar'} },
+      { caption: 'Etiquetas', action: {state: 'main.tags.listar'} },
       { caption: 'Cursos', action: {state: 'main.cursos.listar'} },
       { caption: 'Salas', action: {state: 'main.salas.listar'} },
       { caption: 'Turmas', action: {state: 'main.turmas.listar'} }

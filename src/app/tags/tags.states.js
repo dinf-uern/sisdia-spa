@@ -24,7 +24,7 @@
           rightSidenavPartialOnSmall: 'app/tags/tags.filters.view.html',
           floatingButtons: [
             {
-              caption: 'Criar Tag',
+              caption: 'Criar Etiqueta',
               icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/content/svg/production/ic_add_24px.svg',
               action: { state: 'main.tags.criar' }
             },
@@ -38,7 +38,7 @@
       .state('main.tags.criar', {
         url: '/criar',
         data: {
-          title: 'Criar Tag',
+          title: 'Criar Etiqueta',
           leftSidenavFixedOnLarge: false,
           floatingButtons: [
             {
