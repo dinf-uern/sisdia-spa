@@ -22,5 +22,7 @@
     <div layout="row" layout-align="center center" ng-if="ctrl.loading" style="padding-bottom: 20px;">
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </div>
-    <!--<df-button caption="'carregar +'" action="{ exec: loadMore }"></df-button>-->
+    <div layout="column" layout-align="center center">
+      <md-button class="md-accent md-raised" ng-click="ctrl.loadMore()" ng-if="ctrl.items.length < ctrl.count">carregar +</md-button>
+    </div>
 </md-card>
