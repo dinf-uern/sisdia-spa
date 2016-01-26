@@ -39,7 +39,7 @@
     vm.loadData = function(filters){
       vm.loading = true;
 
-      Salas
+      return Salas
         .getList(filters)
         .then(function(response){
           vm.loading = false;
@@ -67,10 +67,14 @@
 
 
     Salas.get('count', {where: filters.where}).then(function(result){
+      vm.loading = true;
       vm.count = result.data.count;
+
+      vm.loadData(filters).then(function(result){
+        vm.loading = false;
+      });
     });
 
-    vm.loadData(filters);
 
     $scope.$on('scroll.reached-end', function(){
       vm.loadMore();
