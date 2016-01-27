@@ -22,6 +22,14 @@
           title: 'Etiquetas',
           leftSidenavPartialOnLarge: 'app/tags/tags.filters.view.html',
           rightSidenavPartialOnSmall: 'app/tags/tags.filters.view.html',
+          leftButtons: [
+            {
+              caption: 'Menu',
+              icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/navigation/svg/production/ic_menu_24px.svg',
+              media: ['xs', 'sm', 'md'],
+              action: {event: 'left-sidenav.toggle'}
+            }
+          ],
           floatingButtons: [
             {
               caption: 'Criar Etiqueta',
