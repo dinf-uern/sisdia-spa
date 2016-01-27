@@ -19,9 +19,25 @@
       .state('main.tags.listar', {
         url: '?:q',
         data: {
-          title: 'Tags',
+          title: 'Etiquetas',
           leftSidenavPartialOnLarge: 'app/tags/tags.filters.view.html',
           rightSidenavPartialOnSmall: 'app/tags/tags.filters.view.html',
+          leftButtons: [
+            {
+              caption: 'Menu',
+              icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/navigation/svg/production/ic_menu_24px.svg',
+              media: ['xs', 'sm', 'md'],
+              action: {event: 'left-sidenav.toggle'}
+            }
+          ],
+          rightButtons: [
+            {
+              caption: 'Filtros',
+              icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/content/svg/production/ic_filter_list_24px.svg',
+              media: ['xs', 'sm', 'md'],
+              action: {event: 'right-sidenav.toggle'}
+            }
+          ],
           floatingButtons: [
             {
               caption: 'Criar Etiqueta',
@@ -56,7 +72,7 @@
       .state('main.tags.editar', {
         url: '/editar/:id',
         data: {
-          title: 'Editar Tag',
+          title: 'Editar Etiqueta',
           leftSidenavFixedOnLarge: false,
           floatingButtons: [
             {
@@ -74,7 +90,7 @@
       .state('main.tags.ver', {
         url: '/ver/:id',
         data: {
-          title: 'Ver Tag',
+          title: 'Ver Etiqueta',
           leftSidenavFixedOnLarge: false,
           floatingButtons: [
             {

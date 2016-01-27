@@ -22,6 +22,22 @@
           title: 'Salas',
           leftSidenavPartialOnLarge: 'app/salas/salas.filters.view.html',
           rightSidenavPartialOnSmall: 'app/salas/salas.filters.view.html',
+          leftButtons: [
+            {
+              caption: 'Menu',
+              icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/navigation/svg/production/ic_menu_24px.svg',
+              media: ['xs', 'sm', 'md'],
+              action: {event: 'left-sidenav.toggle'}
+            }
+          ],
+          rightButtons: [
+            {
+              caption: 'Filtros',
+              icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/content/svg/production/ic_filter_list_24px.svg',
+              media: ['xs', 'sm', 'md'],
+              action: {event: 'right-sidenav.toggle'}
+            }
+          ],
           floatingButtons: [
             {
               caption: 'Criar Sala',
