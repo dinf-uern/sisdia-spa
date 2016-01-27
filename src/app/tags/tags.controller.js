@@ -6,7 +6,11 @@
     .controller('TagsController', TagsController);
 
   /** @ngInject */
-  function TagsController() {
+  function TagsController($scope, $state) {
     var vm = this;
+
+    $scope.$on('ui.request-back', function(){
+      $state.go('main.tags.listar');
+    });
   }
 })();
