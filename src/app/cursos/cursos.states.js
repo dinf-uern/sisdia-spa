@@ -30,6 +30,14 @@
               action: {event: 'left-sidenav.toggle'}
             }
           ],
+          rightButtons: [
+            {
+              caption: 'Filtros',
+              icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/content/svg/production/ic_filter_list_24px.svg',
+              media: ['xs', 'sm', 'md'],
+              action: {event: 'right-sidenav.toggle'}
+            }
+          ],
           floatingButtons: [
             {
               caption: 'Criar Curso',
