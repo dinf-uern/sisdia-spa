@@ -11,7 +11,7 @@
       .state('main.home', {
         url: '/',
         data: {
-          title: 'Home',
+          title: 'Início',
           leftSidenavFixedOnLarge: false
         },
         templateUrl: 'app/home/home.view.html',

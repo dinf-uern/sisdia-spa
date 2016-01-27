@@ -26,6 +26,7 @@
               icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/content/svg/production/ic_filter_list_24px.svg',
               media: ['sm', 'md'],
               action: {event: 'right-sidenav.toggle'}
+              caption: 'Voltar',
             }
           ],
           title: 'Sisdia',

@@ -19,7 +19,7 @@
       .state('main.tags.listar', {
         url: '?:q',
         data: {
-          title: 'Tags',
+          title: 'Etiquetas',
           leftSidenavPartialOnLarge: 'app/tags/tags.filters.view.html',
           rightSidenavPartialOnSmall: 'app/tags/tags.filters.view.html',
           floatingButtons: [
@@ -56,7 +56,7 @@
       .state('main.tags.editar', {
         url: '/editar/:id',
         data: {
-          title: 'Editar Tag',
+          title: 'Editar Etiqueta',
           leftSidenavFixedOnLarge: false,
           floatingButtons: [
             {
@@ -74,7 +74,7 @@
       .state('main.tags.ver', {
         url: '/ver/:id',
         data: {
-          title: 'Ver Tag',
+          title: 'Ver Etiqueta',
           leftSidenavFixedOnLarge: false,
           floatingButtons: [
             {
