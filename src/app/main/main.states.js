@@ -16,7 +16,7 @@
             {
               caption: 'Voltar',
               icon: 'https://raw.githubusercontent.com/google/material-design-icons/master/navigation/svg/production/ic_arrow_back_24px.svg',
-              media: ['xs', 'sm', 'md'],
+              media: ['xs', 'sm', 'md', 'lg', 'gt-lg'],
               action: {event: 'ui.request-back'}
             }
           ],
