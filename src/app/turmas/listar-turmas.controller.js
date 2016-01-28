@@ -11,7 +11,7 @@
 
     vm.$stateParams = $stateParams;
 
-    var day;
+    var day = moment();
 
     if ($stateParams.day || turmas.data.length > 0) {
       if ($stateParams.day) {
