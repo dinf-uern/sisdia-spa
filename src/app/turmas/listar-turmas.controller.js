@@ -11,7 +11,7 @@
 
     vm.$stateParams = $stateParams;
 
-    var day;
+    var day = moment();
 
     if ($stateParams.day || turmas.data.length > 0) {
       if ($stateParams.day) {
@@ -125,9 +125,12 @@
     vm.eventRender = function( event, element, view ) {
 
       var iconsContainer = $('<div class="event-icons-container"></div>');
-      iconsContainer.append(_.map(event.model.curso.tags, function(tag){
-        return '<img class="event-icon" src="' + tag.imgUrl + '">';
-      }));
+
+      if (event && event.model && event.model.curso && event.model.curso.tags && event.model.curso.tags.length > 0) {
+        iconsContainer.append(_.map(event.model.curso.tags, function(tag){
+          return '<img class="event-icon" src="' + tag.imgUrl + '">';
+        }));
+      }
 
       element.find('.fc-title').append(iconsContainer);
       element.css('background-color', event.model.cor);
