@@ -26,11 +26,11 @@
       .warnPalette('red');
 
     var menuItems = [
-      { caption: 'Início', action: {state: 'main.home'} },
-      { caption: 'Etiquetas', action: {state: 'main.tags.listar'} },
-      { caption: 'Cursos', action: {state: 'main.cursos.listar'} },
-      { caption: 'Salas', action: {state: 'main.salas.listar'} },
-      { caption: 'Turmas', action: {state: 'main.turmas.listar'} }
+      { caption: 'Início', action: {state: 'main.home'}, activeState: "main.home.*" },
+      { caption: 'Etiquetas', action: {state: 'main.tags.listar'}, activeState: "main.tags.*" },
+      { caption: 'Cursos', action: {state: 'main.cursos.listar'}, activeState: "main.cursos.*" },
+      { caption: 'Salas', action: {state: 'main.salas.listar'}, activeState: "main.salas.*" },
+      { caption: 'Turmas', action: {state: 'main.turmas.listar'}, activeState: "main.turmas.*" }
     ];
 
     menuItems.forEach(dfMainMenuProvider.addItem);
