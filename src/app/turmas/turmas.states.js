@@ -59,11 +59,16 @@
               }]}
             ];
 
+            var where = {
+              $and: []
+            };
+
             if (tags && tags.length > 0)
-              include[0].include[0].where = {id: {$in: tags}};
+              where.$and.push({"$curso.tags.id$": {$in: tags}});
 
             return Restangular.all('turmas').getList({
-              include: angular.toJson(include)
+              include: angular.toJson(include),
+              where: angular.toJson(where)
             });
           }
         },
