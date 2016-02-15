@@ -1,4 +1,5 @@
 <form name="form" novalidate>
+
     <md-input-container class="md-block">
         <label>Nome</label>
         <input md-maxlength="255" required name="nome" ng-model="formData.nome">
@@ -7,6 +8,7 @@
             <div ng-message="md-maxlength">O nome deve ter no máximo 255 caracteres.</div>
         </div>
     </md-input-container>
+
     <md-input-container class="md-block">
         <label>Carga Horária (Ch)</label>
         <input type="number" required name="cargaHoraria" ng-model="formData.cargaHoraria">
@@ -14,6 +16,7 @@
             <div ng-message="required">Informe a carga horária.</div>
         </div>
     </md-input-container>
+
     <md-input-container class="md-block">
         <label>Descrição</label>
         <textarea name="descricao" ng-model="formData.descricao" required></textarea>

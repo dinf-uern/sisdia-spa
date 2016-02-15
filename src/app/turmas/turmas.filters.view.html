@@ -8,6 +8,24 @@
     </md-input-container>
     <!-- fim pesquisar -->
 
+    <!-- tags -->
+    <md-input-container md-no-float class="md-block">
+      <md-chips ng-model="ctrl.filters.tags" md-transform-chip="ctrl.toPlainTag($chip)" md-autocomplete-snap  md-require-match="true">
+        <md-autocomplete
+          md-selected-item="ctrl.tagSelecionada"
+          md-search-text="ctrl.tagSrchTerm"
+          md-items="item in ctrl.queryTags(ctrl.tagSrchTerm)"
+          md-item-text="item.nome"
+          placeholder="+Etiqueta">
+          <span md-highlight-text="tagSrchTerm">{{item.nome}}</span>
+        </md-autocomplete>
+        <md-chip-template>
+          <img ng-if="$chip.imgUrl" class="tag-icon" ng-src="{{$chip.imgUrl}}"><span>{{$chip.nome}}</span>
+        </md-chip-template>
+      </md-chips>
+    </md-input-container>
+    <!-- fim tags -->
+
     <div layout="column">
         <md-button class="md-raised" ng-click="ctrl.aplicar()" flex>aplicar <md-icon md-svg-src="bower_components/material-design-icons/action/svg/production/ic_done_24px.svg"></md-icon></md-button>
         <md-button class="md-raised" ng-click="ctrl.limpar()" flex>limpar <md-icon md-svg-src="bower_components/material-design-icons/content/svg/production/ic_clear_24px.svg"></md-icon></md-button>

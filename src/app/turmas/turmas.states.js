@@ -17,7 +17,7 @@
       })
 
       .state('main.turmas.listar', {
-        url: '?:calendarMode&:day',
+        url: '?:calendarMode&:day&:tags',
         params: {
           calendarMode: 'agendaWeek'
         },
@@ -50,11 +50,25 @@
           ]
         },
         resolve: {
-          turmas: function(Restangular){
+          turmas: function(Restangular, $stateParams){
+            var tags = $stateParams.tags ? angular.fromJson($stateParams.tags) : [];
+
+            var include = [
+              {model: "curso", include: [{
+                model: "tags"
+              }]}
+            ];
+
+            var where = {
+              $and: []
+            };
+
+            if (tags && tags.length > 0)
+              where.$and.push({"$curso.tags.id$": {$in: tags}});
+
             return Restangular.all('turmas').getList({
-              include: angular.toJson([
-                {model: 'curso'}
-              ])
+              include: angular.toJson(include),
+              where: angular.toJson(where)
             });
           }
         },
