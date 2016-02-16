@@ -7,9 +7,10 @@
 
   /** @ngInject */
   function TurmasFiltersController($window, $state, $stateParams, Restangular, dfSidenav) {
-    var Tags = Restangular.all('tags');
     var vm = this;
 
+    var Tags = Restangular.all('tags');
+    var Cursos = Restangular.all('cursos');
     vm.filters = {
       q: $stateParams.q ? $stateParams.q : '',
       tags: []
