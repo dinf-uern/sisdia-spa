@@ -26,6 +26,12 @@
     </md-input-container>
     <!-- fim tags -->
 
+    <!-- filtro:curso -->
+    <md-select placeholder="Curso" ng-model="ctrl.filters.curso" md-on-open="ctrl.loadCursos(ctrl.filters.tags)">
+      <md-option ng-value="curso.id" ng-repeat="curso in ctrl.cursos">{{curso.nome}}</md-option>
+    </md-select>
+    <!-- fim filtro:curso -->
+
     <div layout="column">
         <md-button class="md-raised" ng-click="ctrl.aplicar()" flex>aplicar <md-icon md-svg-src="bower_components/material-design-icons/action/svg/production/ic_done_24px.svg"></md-icon></md-button>
         <md-button class="md-raised" ng-click="ctrl.limpar()" flex>limpar <md-icon md-svg-src="bower_components/material-design-icons/content/svg/production/ic_clear_24px.svg"></md-icon></md-button>
