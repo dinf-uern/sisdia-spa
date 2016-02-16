@@ -49,6 +49,20 @@
       dfSidenav.hideAll();
     }
 
+    vm.loadCursos = function(tags){
+      var include = [
+        {model:"tags", attributes:["id"], where: {
+          id: {$in: _(tags).map(pickId)}
+        }}
+      ];
+
+      vm.cursos = Cursos.getList({
+        include: angular.toJson(include)
+      }).$object;
+
+      return vm.cursos;
+    }
+
     vm.limpar = function(){
       vm.filters.q = '';
       vm.filters.tags = [];
