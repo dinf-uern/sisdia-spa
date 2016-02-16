@@ -27,7 +27,7 @@
     <!-- fim tags -->
 
     <!-- filtro:curso -->
-    <md-select placeholder="Curso" ng-model="ctrl.filters.curso" md-on-open="ctrl.loadCursos(ctrl.filters.tags)">
+    <md-select placeholder="Curso" ng-model="ctrl.filters.curso" md-on-open="ctrl.loadCursos(ctrl.filters.tags)" ng-disabled="!ctrl.filters.tags || ctrl.filters.tags.length <= 0">
       <md-option ng-value="curso.id" ng-repeat="curso in ctrl.cursos">{{curso.nome}}</md-option>
     </md-select>
     <!-- fim filtro:curso -->
