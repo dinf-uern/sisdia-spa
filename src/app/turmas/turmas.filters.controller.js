@@ -46,6 +46,7 @@
     vm.aplicar = function(){
       var filters = {
         q: vm.filters.q,
+        curso: vm.filters.curso,
         tags: angular.toJson(_(vm.filters.tags).map(pickId))
       };
 
