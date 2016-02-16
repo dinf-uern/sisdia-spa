@@ -11,6 +11,9 @@
 
     var Tags = Restangular.all('tags');
     var Cursos = Restangular.all('cursos');
+
+    vm.cursos = [];
+
     vm.filters = {
       q: $stateParams.q ? $stateParams.q : '',
       tags: []
