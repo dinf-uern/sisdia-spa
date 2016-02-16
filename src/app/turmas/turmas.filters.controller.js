@@ -7,20 +7,20 @@
 
   /** @ngInject */
   function TurmasFiltersController($window, $state, $stateParams, Restangular, dfSidenav) {
-    var vm = this;
+    var ctrl = this;
 
     var Tags = Restangular.all('tags');
     var Cursos = Restangular.all('cursos');
 
-    vm.cursos = [];
+    ctrl.cursos = [];
 
-    vm.filters = {
+    ctrl.filters = {
       q: $stateParams.q ? $stateParams.q : '',
       tags: []
     };
 
     if ($stateParams.tags) {
-      vm.filters.tags = Tags.getList({
+      ctrl.filters.tags = Tags.getList({
         where: {
           id: {
             $in: angular.fromJson($stateParams.tags)
@@ -32,47 +32,47 @@
       return obj.id;
     }
 
-    vm.toPlainTag = function($chip){
+    ctrl.toPlainTag = function($chip){
       return $chip.plain();
     }
 
-    vm.queryTags = function(srch){
+    ctrl.queryTags = function(srch){
       return Tags.getList({
         where: { nome: {ilike: '%' + srch + '%'} },
         limit: 10
       }).$object;
     }
 
-    vm.aplicar = function(){
+    ctrl.aplicar = function(){
       var filters = {
-        q: vm.filters.q,
-        curso: vm.filters.curso,
-        tags: angular.toJson(_(vm.filters.tags).map(pickId))
+        q: ctrl.filters.q,
+        curso: ctrl.filters.curso,
+        tags: angular.toJson(_(ctrl.filters.tags).map(pickId))
       };
 
       $state.go('main.turmas.listar', filters);
       dfSidenav.hideAll();
     }
 
-    vm.loadCursos = function(tags){
+    ctrl.loadCursos = function(tags){
       var include = [
         {model:"tags", attributes:["id"], where: {
           id: {$in: _(tags).map(pickId)}
         }}
       ];
 
-      vm.cursos = Cursos.getList({
+      ctrl.cursos = Cursos.getList({
         include: angular.toJson(include)
       }).$object;
 
-      return vm.cursos;
+      return ctrl.cursos;
     }
 
-    vm.limpar = function(){
-      vm.filters.q = '';
-      vm.filters.tags = [];
+    ctrl.limpar = function(){
+      ctrl.filters.q = '';
+      ctrl.filters.tags = [];
 
-      $state.go('main.turmas.listar', vm.filters);
+      $state.go('main.turmas.listar', ctrl.filters);
       dfSidenav.hideAll();
     }
 
