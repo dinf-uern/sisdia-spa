@@ -6,34 +6,23 @@
     .controller('TurmasFiltersController', TurmasFiltersController);
 
   /** @ngInject */
-  function TurmasFiltersController($window, $state, $stateParams, Restangular, dfSidenav) {
+  function TurmasFiltersController($window, $scope, $rootScope, $state, $stateParams, Restangular, Utils, dfSidenav) {
     var ctrl = this;
 
     var Tags = Restangular.all('tags');
     var Cursos = Restangular.all('cursos');
 
-    ctrl.cursos = [];
+    function getFilters(params){
+      var curso = angular.fromJson(params.curso);
+      var tags = angular.fromJson(params.tags);
 
-    ctrl.filters = {
-      q: $stateParams.q ? $stateParams.q : '',
-      tags: []
-    };
+      var filters = {
+        q: $stateParams.q || "",
+        curso: $stateParams.curso ? angular.fromJson($stateParams.curso) : {tags:[]} ,
+        tags: $stateParams.tags ? angular.fromJson($stateParams.tags) : []
+      };
 
-    if ($stateParams.tags) {
-      ctrl.filters.tags = Tags.getList({
-        where: {
-          id: {
-            $in: angular.fromJson($stateParams.tags)
-          }}
-      }).$object;
-    }
-
-    function pickId(obj){
-      return obj.id;
-    }
-
-    ctrl.toPlainTag = function($chip){
-      return $chip.plain();
+      return filters;
     }
 
     ctrl.queryTags = function(srch){
@@ -46,8 +35,8 @@
     ctrl.aplicar = function(){
       var filters = {
         q: ctrl.filters.q,
-        curso: ctrl.filters.curso,
-        tags: angular.toJson(_(ctrl.filters.tags).map(pickId))
+        curso: angular.toJson(ctrl.filters.curso),
+        tags: angular.toJson(ctrl.filters.tags)
       };
 
       $state.go('main.turmas.listar', filters);
@@ -57,24 +46,47 @@
     ctrl.loadCursos = function(tags){
       var include = [
         {model:"tags", attributes:["id"], where: {
-          id: {$in: _(tags).map(pickId)}
+          id: {$in: _(tags).map(Utils.pick('id'))}
         }}
       ];
 
-      ctrl.cursos = Cursos.getList({
+      return Cursos.getList({
         include: angular.toJson(include)
-      }).$object;
-
-      return ctrl.cursos;
+      }).then(function(response){
+        ctrl.cursos = response.data.map(function(curso){ return curso.plain() });
+      });
     }
 
     ctrl.limpar = function(){
       ctrl.filters.q = '';
       ctrl.filters.tags = [];
+      ctrl.filters.curso = null;
 
       $state.go('main.turmas.listar', ctrl.filters);
       dfSidenav.hideAll();
     }
+
+    $scope.$watch('ctrl.filters.tags', function(newTags){
+      if (_.isObject(ctrl.filters.curso) && _.isArray(ctrl.filters.curso.tags)) {
+        var newTagsIds = newTags.map(Utils.pick('id'));
+        var cursoAtualTagsIds = ctrl.filters.curso.tags.map(Utils.pick('id'));
+
+        var comumTags = _.intersection(newTagsIds, cursoAtualTagsIds);
+
+        if (!(comumTags.length > 0))
+          ctrl.filters.curso = null;
+
+      }
+    }, true);
+
+    $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams, options){
+      ctrl.filters = getFilters(toParams);
+      ctrl.loadCursos(ctrl.filters.tags);
+    });
+
+    ctrl.cursos = [];
+    ctrl.filters = getFilters($stateParams);
+    ctrl.loadCursos(ctrl.filters.tags);
 
   }
 })();

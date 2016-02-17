@@ -10,7 +10,7 @@
 
     <!-- tags -->
     <md-input-container md-no-float class="md-block">
-      <md-chips ng-model="ctrl.filters.tags" md-transform-chip="ctrl.toPlainTag($chip)" md-autocomplete-snap  md-require-match="true">
+      <md-chips ng-model="ctrl.filters.tags" md-autocomplete-snap  md-require-match="true">
         <md-autocomplete
           md-selected-item="ctrl.tagSelecionada"
           md-search-text="ctrl.tagSrchTerm"
@@ -20,15 +20,15 @@
           <span md-highlight-text="tagSrchTerm">{{item.nome}}</span>
         </md-autocomplete>
         <md-chip-template>
-          <img ng-if="$chip.imgUrl" class="tag-icon" ng-src="{{$chip.imgUrl}}"><span>{{$chip.nome}}</span>
+          <img ng-if="$chip.imgUrl" class="tag-icon" ng-src="{{$chip.imgUrl | decodeUrl}}"><span>{{$chip.nome}}</span>
         </md-chip-template>
       </md-chips>
     </md-input-container>
     <!-- fim tags -->
 
     <!-- filtro:curso -->
-    <md-select placeholder="Curso" ng-model="ctrl.filters.curso" md-on-open="ctrl.loadCursos(ctrl.filters.tags)" ng-disabled="!ctrl.filters.tags || ctrl.filters.tags.length <= 0">
-      <md-option ng-value="curso.id" ng-repeat="curso in ctrl.cursos">{{curso.nome}}</md-option>
+    <md-select placeholder="Curso" ng-model="ctrl.filters.curso" ng-model-options="{trackBy: '$value.id'}" md-on-open="ctrl.loadCursos(ctrl.filters.tags)" ng-disabled="!ctrl.filters.tags || ctrl.filters.tags.length <= 0">
+      <md-option ng-value="curso" ng-repeat="curso in ctrl.cursos">{{curso.nome}}</md-option>
     </md-select>
     <!-- fim filtro:curso -->
 
