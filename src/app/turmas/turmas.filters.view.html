@@ -10,7 +10,7 @@
 
     <!-- tags -->
     <md-input-container md-no-float class="md-block">
-      <md-chips ng-model="ctrl.filters.tags" md-autocomplete-snap  md-require-match="true">
+      <md-chips ng-model="ctrl.filters.tags" md-transform-chip="ctrl.toPlainTag($chip)" md-autocomplete-snap  md-require-match="true">
         <md-autocomplete
           md-selected-item="ctrl.tagSelecionada"
           md-search-text="ctrl.tagSrchTerm"

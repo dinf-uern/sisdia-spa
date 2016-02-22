@@ -25,6 +25,10 @@
       return filters;
     }
 
+    ctrl.toPlainTag = function($chip) {
+      return $chip.plain();
+    }
+
     ctrl.queryTags = function(srch){
       return Tags.getList({
         where: { nome: {ilike: '%' + srch + '%'} },
