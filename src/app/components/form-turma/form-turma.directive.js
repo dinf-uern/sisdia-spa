@@ -37,7 +37,7 @@
 
 
     /** @ngInject */
-    function formTurmaController($log, $scope, Restangular, Utils) {
+    function formTurmaController($log, $scope, Restangular, Utils, colorGen) {
       var Cursos = Restangular.all('cursos');
       var Salas = Restangular.all('salas');
       var primeiroDia = moment([1970]);
