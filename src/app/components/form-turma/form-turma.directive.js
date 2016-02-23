@@ -54,6 +54,16 @@
         vm.salas = Salas.getList().$object;
       }
 
+      vm.gerarCor = function(e){
+        e.preventDefault();
+
+        $scope.formData.cor = colorGen.make_color({
+          hue: 0,
+          saturation: .5,
+          value: 0.65
+        })[0];
+      }
+
       vm.salaSrchTerm = "";
       vm.nomeTurmaMode = 'templateBased';
 
