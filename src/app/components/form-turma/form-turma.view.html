@@ -28,6 +28,7 @@
             <md-input-container class="md-block">
                 <label>Cor da turma</label>
                 <input type="color" required name="cor" ng-model="formData.cor">
+                <a href="#" ng-click="ctrl.gerarCor($event)">gerar cor</a>
                 <div ng-messages="form.cor.$error" ng-if="form.$dirty">
                     <div ng-message="required">Escolha uma cor!</div>
                 </div>
