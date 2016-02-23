@@ -5,5 +5,6 @@
   angular
     .module('sisdia')
     .constant('malarkey', malarkey)
-    .constant('moment', moment);
+    .constant('moment', moment)
+    .constant('colorGen', Please);
 })();
