@@ -36,6 +36,11 @@
         "dist/fullcalendar.css",
         "dist/lang/pt-br.js"
       ]
+    },
+    "pleasejs": {
+      "main": [
+        "src/Please.js"
+      ]
     }
   },
   "resolutions": {
